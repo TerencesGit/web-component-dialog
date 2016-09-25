@@ -7,7 +7,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
 	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 	<meta name="format-detection" content="telephone=no,email=no"/>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
 	<div class="dialog-modal">
@@ -28,5 +28,29 @@
 	<button id="btn4" class="btn-block">带有确认按钮的警告框，点击按钮不关闭</button>
 	<button id="btn5" class="btn-block">多组按钮框，样式可定制</button>
 	<button id="btn6" class="btn-block">带有确认和删除按钮，点击确认按钮弹出加载框后2s后关闭</button>
+	<script src="bower_components/zeptojs/src/zepto.js"></script>
+	<script src="bower_components/zeptojs/src/touch.js"></script>
+	<script src="js/dialog.js"></script>
+	<script>
+		var d = new Dialog({
+			message: '确认取消收藏？',
+			type: 'loading',
+			buttons: [{
+				type: 'confirm',
+				text: 'yes',
+				callback: function(){
+					alert('ok')
+				}
+			},{
+				type: 'cancel',
+				text: 'no',
+				callback: function(){
+					alert('cancel')
+				}
+			}],
+			delay: 2000,
+			maskOpcity: .6
+		})
+	</script>
 </body>
 </html>

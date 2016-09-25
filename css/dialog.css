@@ -65,10 +65,13 @@ body{
 }
 .dialog-footer{
 	padding: 1em 1em 0;
-	text-align: center
+	display: flex;
+	justify-content: center;
+	align-items: center
 }
 .dialog-footer .btn{
 	-webkit-appearance: normal;
+	margin: 0 10px;
 	text-shadow: 0 0 1px #666;
 }
 .dialog-footer .btn.btn-confirm{
