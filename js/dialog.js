@@ -17,8 +17,20 @@
 		}else{
 			this.isConfig = true
 		}
-		console.log(this.config)
+		this.renderUI()
 	};
-	Dialog.prototype = {};
+	Dialog.prototype = {
+		renderUI: function(){
+			var _this = this,
+					config = this.config;
+			this.modal = $('<div class="dialog-modal"></div>');
+			var dialog = $('<div class="dialog-container"><div>')
+			var header = $('<div class="dialog-header"></div>');
+			if(this.isConfig){
+					dialog.append(header.addClass('waiting'));
+			}	
+			this.modal.append(dialog).appendTo($('body'))
+		}
+	};
 	window.Dialog = Dialog;
 })(Zepto)

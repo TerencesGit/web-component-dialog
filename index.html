@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
-	<div class="dialog-modal">
+<!-- 	<div class="dialog-modal">
 		<div class="dialog-container">
-			<div class="dialog-header"></div>
+			<div class="dialog-header waiting"></div>
 			<div class="dialog-body">
 				确认清空购物车吗？
 			</div>
@@ -21,36 +21,39 @@
 				<button class="btn btn-cancel">取消</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<button id="btn1" class="btn-block">没有任何参数</button>
 	<button id="btn2" class="btn-block">没有按钮，2s后自动关闭</button>
 	<button id="btn3" class="btn-block">带有确认和取消按钮，点击按钮关闭</button>
 	<button id="btn4" class="btn-block">带有确认按钮的警告框，点击按钮不关闭</button>
 	<button id="btn5" class="btn-block">多组按钮框，样式可定制</button>
 	<button id="btn6" class="btn-block">带有确认和删除按钮，点击确认按钮弹出加载框后2s后关闭</button>
-	<script src="bower_components/zeptojs/src/zepto.js"></script>
-	<script src="bower_components/zeptojs/src/touch.js"></script>
+	<script src="js/zepto/zepto.min.js"></script>
+	<script src="js/zepto/touch.js"></script>
 	<script src="js/dialog.js"></script>
 	<script>
-		var d = new Dialog({
-			message: '确认取消收藏？',
-			type: 'loading',
-			buttons: [{
-				type: 'confirm',
-				text: 'yes',
-				callback: function(){
-					alert('ok')
-				}
-			},{
-				type: 'cancel',
-				text: 'no',
-				callback: function(){
-					alert('cancel')
-				}
-			}],
-			delay: 2000,
-			maskOpcity: .6
+		$('#btn1').click(function(){
+			new Dialog()
 		})
+		// var dialog = new Dialog({
+		// 	message: '确认取消收藏？',
+		// 	type: 'loading',
+		// 	buttons: [{
+		// 		type: 'confirm',
+		// 		text: 'yes',
+		// 		callback: function(){
+		// 			alert('ok')
+		// 		}
+		// 	},{
+		// 		type: 'cancel',
+		// 		text: 'no',
+		// 		callback: function(){
+		// 			alert('cancel')
+		// 		}
+		// 	}],
+		// 	delay: 2000,
+		// 	maskOpcity: .6
+		// })
 	</script>
 </body>
 </html>
