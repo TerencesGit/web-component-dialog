@@ -32,30 +32,37 @@
 	<script src="js/zepto/touch.js"></script>
 	<script src="js/dialog.js"></script>
 	<script>
-		$('#btn1').click(function(){
+		$('#btn1').on('tap',function(){
 			new Dialog()
 		})
-		$('#btn2').click(function(){
+		$('#btn2').tap(function(){
 			var dialog = new Dialog({
 				//width: 300,
-				//height: 250,
-				message: '确认取消收藏？',
+				message: '删除成功',
+				type: 'ok',
+				delay: 2000,
+				maskOpcity: .6
+			})
+		})
+		$('#btn3').tap(function(){
+			new Dialog({
+				message: '确认关闭弹窗？',
 				type: 'warning',
 				buttons: [{
 					type: 'confirm',
 					text: 'yes',
 					callback: function(){
-						alert('ok')
+						alert('you click the yes button')
 					}
 				},{
 					type: 'cancel',
 					text: 'no',
 					callback: function(){
-						alert('cancel')
+						alert('you click the no button')
+						return false
 					}
 				}],
-				delay: 2000,
-				maskOpcity: .1
+				maskOpcity: .6
 			})
 		})
 	</script>
