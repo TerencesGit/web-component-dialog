@@ -33,11 +33,11 @@
 	<script src="js/dialog.js"></script>
 	<script>
 		$('#btn1').on('tap',function(){
-			new Dialog()
+			//new Dialog()
+			$.dialog()
 		})
 		$('#btn2').tap(function(){
-			var dialog = new Dialog({
-				//width: 300,
+			$.dialog({
 				message: '删除成功',
 				type: 'ok',
 				delay: 2000,
@@ -45,7 +45,7 @@
 			})
 		})
 		$('#btn3').tap(function(){
-			new Dialog({
+			$.dialog({
 				message: '确认关闭弹窗？',
 				type: 'warning',
 				buttons: [{
@@ -61,8 +61,36 @@
 						alert('you click the no button')
 						return false
 					}
-				}],
-				maskOpcity: .6
+				}]
+			})
+		})
+		$('#btn6').tap(function(){
+			$.dialog({
+				message: '确认删除该文件？',
+				type: 'warning',
+				buttons: [{
+					type: 'confirm',
+					text: '确认',
+					callback: function(){
+						$.dialog({
+							type: 'waiting',
+							callback: function(){
+								$.dialog({
+									type: 'ok',
+									message: '删除成功',
+									delay: 1000
+								})
+							},
+							delay: 2000
+						})
+					}
+				},{
+					type: 'cancel',
+					text: '取消',
+					callback: function(){
+						return true
+					}
+				}]
 			})
 		})
 	</script>

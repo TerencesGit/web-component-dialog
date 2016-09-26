@@ -1,5 +1,4 @@
 ;(function($){
-
 	var Dialog = function(config){
 		//默认参数设置
 		this.config = {
@@ -9,7 +8,9 @@
 			type: 'loading',
 			buttons: null,
 			delay: null,
-			maskOpcity: null
+			maskOpcity: null,
+			callback: null,
+			effect: true
 		}
 		if(this.config && $.isPlainObject(config)){
 			$.extend(this.config,config)
@@ -23,29 +24,39 @@
 			var _this = this,
 			    config = this.config;
 			this.modal = $('<div class="dialog-modal"></div>');
-			var dialog = $('<div class="dialog-container"></div>'),
-			    header = $('<div class="dialog-header"></div>'),
+			this.dialog = $('<div class="dialog-container"></div>');
+			var header = $('<div class="dialog-header"></div>'),
 			    body = $('<div class="dialog-body"></div>'),
 			    footer = $('<div class="dialog-footer"></div>');
 			if(this.isConfig){
-					dialog.append(header.addClass('waiting'));
+					this.dialog.append(header.addClass('waiting'));
 			}else{
 				this.modal.css({
 					background: 'rgba(0,0,0,'+config.maskOpcity+')'
 				})
-				dialog.width(config.width);
-				dialog.height(config.height);
-				dialog.append(header.addClass(config.type));
-				dialog.append(body.html(config.message));
+				this.dialog.width(config.width);
+				this.dialog.height(config.height);
+				this.dialog.append(header.addClass(config.type));
+				if(config.message){
+					this.dialog.append(body.html(config.message));
+				}
 				if(config.buttons){
 					this.createButtons(footer,config.buttons);
-					dialog.append(footer)
+					this.dialog.append(footer)
 				}
 			}	
-			this.modal.append(dialog).appendTo($('body'))
+			this.modal.append(this.dialog).appendTo($('body'))
+			if(config.effect){
+				_this.animate()
+			}
 			if(config.delay){
 				window.setTimeout(function(){
 					_this.destroy()
+				},config.delay)
+			}
+			if(config.callback){
+				setTimeout(function(){
+					config.callback();
 				},config.delay)
 			}
 		},
@@ -74,9 +85,19 @@
 				footer.append(button)
 			});
 		},
+		animate: function(){
+				var _this =this.dialog;
+				_this.css({'transform': 'scale(0,0)'})
+				window.setTimeout(function(){
+					_this.css({'transform': 'scale(1,1)'})
+				},200)
+		},
 		destroy: function(){
 			this.modal && this.modal.remove();
 		}
 	};
 	window.Dialog = Dialog;
+	$.dialog = function(config){
+		return new Dialog(config)
+	}
 })(Zepto)
