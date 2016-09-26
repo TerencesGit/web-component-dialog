@@ -25,7 +25,7 @@
 	<button id="btn1" class="btn-block">没有任何参数</button>
 	<button id="btn2" class="btn-block">没有按钮，2s后自动关闭</button>
 	<button id="btn3" class="btn-block">带有确认和取消按钮，点击按钮关闭</button>
-	<button id="btn4" class="btn-block">带有确认按钮的警告框，点击按钮不关闭</button>
+	<button id="btn4" class="btn-block">弹出多层窗口</button>
 	<button id="btn5" class="btn-block">多组按钮框，样式可定制</button>
 	<button id="btn6" class="btn-block">带有确认和删除按钮，点击确认按钮弹出加载框后2s后关闭</button>
 	<script src="js/zepto/zepto.min.js"></script>
@@ -50,17 +50,51 @@
 				type: 'warning',
 				buttons: [{
 					type: 'confirm',
-					text: 'yes',
+					text: '确认',
 					callback: function(){
-						alert('you click the yes button')
+						alert('你点击了确认按钮！')
 					}
 				},{
 					type: 'cancel',
-					text: 'no',
+					text: '取消',
 					callback: function(){
-						alert('you click the no button')
+						alert('你点击了取消按钮！')
 						return false
 					}
+				}]
+			})
+		})
+		$('#btn4').tap(function(){
+			$.dialog({
+				message: '弹出下一个窗口？',
+				type: 'warning',
+				buttons: [{
+					type: 'confirm',
+					text: '确认',
+					callback: function(){
+						$.dialog({
+							message: '第二层级',
+							buttons: [{
+								text: '继续弹',
+								callback: function(){
+									$.dialog({
+										message: '第三层级',
+										buttons: [{
+											text: '关闭'
+										}]
+									})
+									return false
+								}
+							},{
+								text: '关闭'
+							}]
+						})
+						return false
+					}
+				},{
+					type: 'cancel',
+					text: '取消',
+					callback: function(){}
 				}]
 			})
 		})
