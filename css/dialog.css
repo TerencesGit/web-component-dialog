@@ -35,7 +35,7 @@ body{
 	align-items: center
 }
 .dialog-container{
-	padding: 1em 1.5em;
+	padding: 1em;
 	border-radius: 10px;
 	background: rgba(0,0,0,.8)
 }
@@ -44,22 +44,26 @@ body{
 	height: 50px;
 	margin: 0 auto
 }
+.dialog-header:before{
+	display: block;
+	font-size: 50px;
+	text-align: center;
+}
 .dialog-header.waiting{
 	background: url(../images/loading.gif)no-repeat;
 	background-size: 50px;
 }
-.dialog-header.ok{
-	background: url(../images/ok.gif)no-repeat;
-	background-position: -2px -4px;
-	background-size: 50px;
+.dialog-header.ok:before{
+	content: '\2714';
+	color: #0f0;
 }
-.dialog-header.warning{
-	background: url(../images/warning.gif)no-repeat;
-	background-position: -2px -2px;
-	background-size: 50px;
+.dialog-header.warning:before{
+	content: '!';
+	color: #f20;
+	font-weight: bold
 }
 .dialog-body{
-	padding: 1em 1em 0;
+	padding: 1em 0 0;
 	color: #fff;
 	font-size: 16px;
 	text-align: center;

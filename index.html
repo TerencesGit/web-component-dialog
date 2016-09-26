@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
-<!-- 	<div class="dialog-modal">
+	<!-- <div class="dialog-modal">
 		<div class="dialog-container">
-			<div class="dialog-header waiting"></div>
+			<div class="dialog-header"></div>
 			<div class="dialog-body">
 				确认清空购物车吗？
 			</div>
@@ -35,25 +35,29 @@
 		$('#btn1').click(function(){
 			new Dialog()
 		})
-		// var dialog = new Dialog({
-		// 	message: '确认取消收藏？',
-		// 	type: 'loading',
-		// 	buttons: [{
-		// 		type: 'confirm',
-		// 		text: 'yes',
-		// 		callback: function(){
-		// 			alert('ok')
-		// 		}
-		// 	},{
-		// 		type: 'cancel',
-		// 		text: 'no',
-		// 		callback: function(){
-		// 			alert('cancel')
-		// 		}
-		// 	}],
-		// 	delay: 2000,
-		// 	maskOpcity: .6
-		// })
+		$('#btn2').click(function(){
+			var dialog = new Dialog({
+				//width: 300,
+				//height: 250,
+				message: '确认取消收藏？',
+				type: 'warning',
+				buttons: [{
+					type: 'confirm',
+					text: 'yes',
+					callback: function(){
+						alert('ok')
+					}
+				},{
+					type: 'cancel',
+					text: 'no',
+					callback: function(){
+						alert('cancel')
+					}
+				}],
+				delay: 2000,
+				maskOpcity: .1
+			})
+		})
 	</script>
 </body>
 </html>
