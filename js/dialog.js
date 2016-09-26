@@ -10,7 +10,8 @@
 			delay: null,
 			maskOpcity: null,
 			callback: null,
-			effect: true
+			effect: true,
+			maskClose: true
 		}
 		if(this.config && $.isPlainObject(config)){
 			$.extend(this.config,config)
@@ -52,12 +53,13 @@
 			if(config.delay){
 				window.setTimeout(function(){
 					_this.destroy()
+					config.callback && config.callback()
 				},config.delay)
 			}
-			if(config.callback){
-				setTimeout(function(){
-					config.callback();
-				},config.delay)
+			if(config.maskClose){
+				this.modal.tap(function(){
+					_this.destroy()
+				})
 			}
 		},
 		createButtons: function(footer,buttons){
@@ -68,7 +70,8 @@
 						callback = this.callback,
 						button = $('<button class="btn '+type+'">'+text+'</button>')
 				if(callback){
-					button.tap(function(){
+					button.tap(function(e){
+						e.stopPropagation();
 						var isClose = callback();
 						if(isClose != false){
 							_this.destroy()
@@ -78,7 +81,8 @@
 						// }
 					})
 				}else{
-					button.tap(function(){
+					button.tap(function(e){
+						e.stopPropagation();
 						_this.destroy()
 					})
 				}
