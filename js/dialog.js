@@ -1,4 +1,8 @@
 ;(function($){
+	//引入fastclick
+	 $(function() {
+	    FastClick.attach(document.body);
+	 });
 	var Dialog = function(config){
 		//默认参数设置
 		this.config = {
@@ -62,6 +66,7 @@
 				})
 			}
 		},
+		//创建按钮
 		createButtons: function(footer,buttons){
 			var _this = this;
 			$(buttons).each(function(index, el) {
@@ -76,9 +81,6 @@
 						if(isClose != false){
 							_this.destroy()
 						}
-						// if($(this).hasClass('confirm')){
-						// 	_this.destroy()
-						// }
 					})
 				}else{
 					button.tap(function(e){
@@ -89,6 +91,7 @@
 				footer.append(button)
 			});
 		},
+		//动画效果
 		animate: function(){
 				var _this =this.dialog;
 				_this.css({'transform': 'scale(0,0)'})
@@ -96,6 +99,7 @@
 					_this.css({'transform': 'scale(1,1)'})
 				},200)
 		},
+		//销毁方法
 		destroy: function(){
 			this.modal && this.modal.remove();
 		}

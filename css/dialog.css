@@ -23,6 +23,9 @@ body{
 	margin: 20px 0;
 	background: #0b0;
 }
+.btn-block:first-child{
+	margin-top: 70px
+}
 .btn-block:hover,
 .btn-block:focus{
 	background: #0a0
@@ -35,15 +38,22 @@ body{
 	width: 100%;
 	height: 100%;
 	background: rgba(0,0,0,.5);
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }
 .dialog-container{
 	padding: 1em;
 	border-radius: 10px;
 	background: rgba(0,0,0,.8);
 	-webkit-transition: all .3s cubic-bezier(0.43, 0.15, 0.81, 1.6);
+	transition: all .3s cubic-bezier(0.43, 0.15, 0.81, 1.6);
 }
 .dialog-header{
 	width: 50px;
@@ -82,9 +92,15 @@ body{
 }
 .dialog-footer{
 	padding: 1em 1em 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
-	align-items: center
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center
 }
 .dialog-footer .btn{
 	-webkit-appearance: normal;

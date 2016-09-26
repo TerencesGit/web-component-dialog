@@ -10,26 +10,14 @@
 	<link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
-	<!-- <div class="dialog-modal">
-		<div class="dialog-container">
-			<div class="dialog-header"></div>
-			<div class="dialog-body">
-				确认清空购物车吗？
-			</div>
-			<div class="dialog-footer">
-				<button class="btn btn-confirm">确认</button>
-				<button class="btn btn-cancel">取消</button>
-			</div>
-		</div>
-	</div> -->
-	<button id="btn1" class="btn-block">没有任何参数</button>
-	<button id="btn2" class="btn-block">没有按钮，2s后自动关闭</button>
-	<button id="btn3" class="btn-block">带有确认和取消按钮，点击按钮关闭</button>
+	<button id="btn1" class="btn-block">默认等待事件</button>
+	<button id="btn2" class="btn-block">2s后自动消失</button>
+	<button id="btn3" class="btn-block">点击按钮回调关闭</button>
 	<button id="btn4" class="btn-block">弹出多层窗口</button>
-	<button id="btn5" class="btn-block">多组按钮框，样式可定制</button>
-	<button id="btn6" class="btn-block">带有确认和删除按钮，点击确认按钮弹出加载框后2s后关闭</button>
+	<button id="btn5" class="btn-block">多个事件回调</button>
 	<script src="js/zepto/zepto.min.js"></script>
 	<script src="js/zepto/touch.js"></script>
+	<script src="js/zepto/fastclick.js"></script>
 	<script src="js/dialog.js"></script>
 	<script>
 		$('#btn1').on('tap',function(){
@@ -75,6 +63,7 @@
 						$.dialog({
 							message: '第二层级',
 							buttons: [{
+								type: 'confirm',
 								text: '继续弹',
 								callback: function(){
 									$.dialog({
@@ -98,20 +87,21 @@
 				}]
 			})
 		})
-		$('#btn6').tap(function(){
+		$('#btn5').tap(function(){
 			$.dialog({
-				message: '确认删除该文件？',
+				message: '您还未登录！',
 				type: 'warning',
 				buttons: [{
 					type: 'confirm',
-					text: '确认',
+					text: '登录',
 					callback: function(){
 						$.dialog({
 							type: 'waiting',
+							message: '登录中...',
 							callback: function(){
 								$.dialog({
 									type: 'ok',
-									message: '删除成功',
+									message: '登录成功',
 									delay: 1000
 								})
 							},
