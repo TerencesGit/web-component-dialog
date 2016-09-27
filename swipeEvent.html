@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>swipe event</title>
+	<link rel="stylesheet" href="css/touch.css">
+</head>
+<body>
+	<p class="desc"></p>
+	<div class="touchPad">触摸板</div>
+	<div class="ball"></div>
+	<script src="js/zepto/zepto.min.js"></script>
+	<script>
+		$(function(){
+			var touchPad = $('.touchPad'),
+					ball = $('.ball'),
+					desc = $('.desc');
+			var SwipeDisdance = 30,
+					SwipeTime = 500;
+			var point_start,
+					point_end,
+					time_start,
+					time_end;
+			var getTouchPos = function(e){
+				var touches = e.touches;
+				if(touches && touches[0]){
+					return {
+						x: touches[0].clientX,
+						y: touches[0].clientY
+					}
+				}
+				return {
+					x: e.clientX,
+					y: e.clientY
+				}
+			}
+			var getDist = function(p1,p2){
+				if(!p1 || !p2) return 0;
+				return Math.sqrt((p1.x - p2.x)*(p1.x - p2.x) + (p1.y - p2.y)*(p1.y - p2.y))
+			}
+			var getAngle = function(p1,p2){
+				var r = Math.atan2(p2.y - p1.y,p2.x - p1.x);
+				var a = r * 180 / Math.PI;
+				return a;
+			}
+			var getSwipedDirection = function(p2,p1){
+				var dx = p2.x - p1.x;
+				var dy = -p2.y + p1.y;
+				var angle = Math.atan2(dy,dx) * 180 / Math.PI;
+				//console.log(angle)
+				if(angle < 45 && angle > -45) return 'right';
+				if(angle >= 45 && angle < 135) return 'top';
+				if(angle >= 135 || angle < -135) return 'left';
+				if(angle >= -135 && angle <= -45) return 'bottom';
+			}
+			var startEvtHandler = function(e){
+				var pos = getTouchPos(e);
+				ball.show().css({
+					left: pos.x,
+					top: pos.y
+				})
+				var touches = e.touches;
+				if(!touches || touches.length == 1){
+					point_start = getTouchPos(e);
+					time_start = Date.now()
+				}
+			}
+			var moveEvtHandler = function(e){
+				var pos = getTouchPos(e);
+				ball.css({
+					left: pos.x,
+					top: pos.y
+				})
+				desc.html(e.type+('   clientX:'+pos.x+'   clientY:'+pos.y+''))
+				point_end = getTouchPos(e);
+				e.preventDefault();
+			}
+			var endEvtHandler = function(e){
+					ball.hide();
+					var time_end = Date.now();
+					if(getDist(point_start,point_end) > SwipeDisdance && time_start - time_end < SwipeTime){
+						var dir = getSwipedDirection(point_end,point_start);
+						touchPad.html('swipe'+dir);
+					}
+			}
+			var startEvt, moveEvt, endEvt;
+			if('ontouchstart' in window){
+				startEvt = 'touchstart';
+				moveEvt = 'touchmove';
+				endEvt = 'touchend';
+			}else{
+				startEvt = 'mousedown';
+				moveEvt = 'mousemove';
+				endEvt = 'mouseup';
+			}
+			touchPad.on(startEvt, startEvtHandler)
+			touchPad.on(moveEvt, moveEvtHandler)
+			touchPad.on(endEvt, endEvtHandler)
+		})
+	</script>
+</body>
+</html>
