@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+	<title>Touch Event</title>
+	<link rel="stylesheet" href="css/touch.css">
+</head>
+<body>
+	<p class="desc"></p>
+	<div class="touchPad">触摸板</div>
+	<div class="ball"></div>
+	<script src="js/zepto/zepto.min.js"></script>
+	<script>
+		$(function(){
+			var touchPad = $('.touchPad'),
+					ball = $('.ball'),
+					desc = $('.desc');
+			var touchHandler = function(e){
+				var type = e.type;
+				if(type != 'touchend'){
+					var pos = {
+						x : e.touches[0].clientX,
+						y : e.touches[0].clientY
+					}
+					ball.css({left: pos.x})
+					ball.css({top: pos.y})
+					desc.html(e.type+'(clientX:'+pos.x+',clientY:'+pos.y+')')
+				}else{
+					desc.html(e.type)
+				}
+				switch(type){
+					case 'touchstart':
+						ball.show()
+						break;
+					case 'touchmove':
+						e.preventDefault;
+						break;
+					case 'touchend':
+						ball.hide()
+						break;
+				}
+			}		
+			touchPad.on('touchstart touchmove touchend',touchHandler)
+		})
+	</script>
+</body>
+</html>
